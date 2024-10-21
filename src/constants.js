@@ -25,5 +25,5 @@ export const CLOUDINARY = {
 
 export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
 
-export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
+export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'src', 'temp');
 export const UPLOAD_DIR = path.join(process.cwd(), 'src', 'uploads');
