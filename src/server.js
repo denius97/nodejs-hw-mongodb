@@ -6,6 +6,7 @@ import router from './routers/index.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
+import { UPLOAD_DIR } from './constants.js';
 
 const PORT = env('PORT', 3000);
 
@@ -30,6 +31,8 @@ export const setupServer = () => {
         "Hello, I'll help you! Go to /contacts to get all contacts. Go to /contacts/<CONTACT_ID> to get the contact you need",
     });
   });
+
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
   app.use(router);
 
