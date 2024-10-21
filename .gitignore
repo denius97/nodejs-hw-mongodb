@@ -2,8 +2,8 @@
 
 .env
 
-src/temp/**
-src/uploads/**
+# src/temp/**
+# src/uploads/**
 
 .vscode
 .DS_Store
