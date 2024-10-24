@@ -1,9 +1,12 @@
 import createHttpError from 'http-errors';
+import { parseBoolean } from '../utils/parseBoolean.js';
 
 export const validateBody = (schema) => async (req, res, next) => {
   try {
     const userId = req.user?._id;
-
+    if (req.body.isFavourite) {
+      req.body.isFavourite = parseBoolean(req.body.isFavourite);
+    }
     if (userId) {
       await schema.validateAsync(
         { userId, ...req.body },

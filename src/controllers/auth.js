@@ -1,19 +1,21 @@
-import { THIRTY_DAYS } from '../constants.js';
+import { TIME } from '../constants.js';
 import {
   logoutUser,
   refreshUsersSession,
   registerUser,
+  resetPwd,
 } from '../services/auth.js';
 import { loginUser } from '../services/auth.js';
+import { requestResetPwd } from '../services/auth.js';
 
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + THIRTY_DAYS),
+    expires: new Date(Date.now() + TIME.THIRTY_DAYS),
   });
   res.cookie('sessionId', session._id, {
     httpOnly: true,
-    expires: new Date(Date.now() + THIRTY_DAYS),
+    expires: new Date(Date.now() + TIME.THIRTY_DAYS),
   });
 };
 
@@ -66,5 +68,24 @@ export const refreshUserSessionCtrl = async (req, res) => {
     data: {
       accessToken: session.accessToken,
     },
+  });
+};
+
+export const requestResetPwdCtrl = async (req, res) => {
+  await requestResetPwd(req.body.email);
+  res.json({
+    message: 'Reset password email has been successfully sent.',
+    status: 200,
+    data: {},
+  });
+};
+
+export const resetPwdCtrl = async (req, res) => {
+  await resetPwd(req.body);
+
+  res.json({
+    message: 'Password was successfully reset!',
+    status: 200,
+    data: {},
   });
 };
